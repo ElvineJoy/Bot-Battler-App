@@ -5,7 +5,7 @@ import '../App.css';
 
 function App() {
   return (
-    <div class='grid-cols-4'>
+    <div>
         <Header />
         <MainContainer />
 
