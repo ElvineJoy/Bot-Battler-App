@@ -5,7 +5,7 @@ import YourBotArmy from './YourBotArmy';
 
 function MainContainer() {
   return (
-    <div>
+    <div >
         <YourBotArmy />
         <SortBar />
         <BotContainer />

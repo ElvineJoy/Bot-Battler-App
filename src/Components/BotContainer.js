@@ -20,11 +20,9 @@ function BotContainer() {
         />
     ))
 
-    
-
   return (
     <div>
-        {botsList}
+        <ul>{botsList}</ul>
     </div>
   )
 }
