@@ -6,6 +6,7 @@ import BotCollection from './BotCollection';
 function BodyContainer() {
   const [bots, setBots] = useState([]);
   const [myArmy, setMyArmy] = useState([]);
+
   
    
   // getting the bots from the API using fetch
@@ -15,9 +16,8 @@ function BodyContainer() {
       .then(bots => {
           setBots(bots)}) 
   }, []);
-  // console.log(bots) 
 
-
+// adding the bot to yourArmy Component
   function handleAddBotToArmy(botToAdd) {
     const myBotArmy = myArmy.find(bot => 
       bot.id === botToAdd.id
@@ -28,9 +28,18 @@ function BodyContainer() {
       alert(`Bot ${botToAdd.name} is in your army, choose another bot!!`)
     }
   }
+
+  // removing the bot from myArmy Component
+  function handleRemoveFromArmy(botToRemove) {
+    setMyArmy((myArmy) => 
+      myArmy.filter((bot) => 
+        bot.id !== botToRemove.id 
+    ));
+  }
+
   return (
     <div>
-         <YourBotArmy bots={myArmy} />
+         <YourBotArmy bots={myArmy} onRemoveBot={handleRemoveFromArmy}/>
          <SortBar />
          <BotCollection bots={bots} onAddBot={handleAddBotToArmy}/>
     </div>
