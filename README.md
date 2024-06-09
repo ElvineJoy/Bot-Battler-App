@@ -10,7 +10,7 @@ You can filter and sort the bots too. Try it out!!
 
 ## The App Outlook
 What should you expect?
-![Alt text](public/Bot Battler App.PNG)
+![App](./public/Bot%20Battler%20App.PNG)
 
 ### Prerequisites
 - Node.js
