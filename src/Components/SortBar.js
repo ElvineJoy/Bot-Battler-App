@@ -11,9 +11,9 @@ function SortBar({filterBy, sortBy, onChangeSort,onChangeFilter }) {
   }
 
   return (
-    <div className="container mx-auto p-3">
-      
-      <div className="flex items-center space-x-4 border border-gray-200 rounded p-3 dark:border-gray-700">
+    <div className="container mx-auto p-2">
+      <div className="flex items-center justify-between space-x-4 border border-gray-200 rounded p-3 dark:border-gray-700">
+        <div className="flex items-center space-x-4">
         <strong className='text-xl font-semibold tracking-tighter'>Sort Bots By:</strong>
         {/* Health */}
         <div className="flex items-center">
@@ -56,9 +56,12 @@ function SortBar({filterBy, sortBy, onChangeSort,onChangeFilter }) {
             />
           <label className="ml-2 text-base font-medium text-gray-900 dark:text-gray-300">Armor</label>
         </div>
+      </div>
+
+        <div className="flex items-center">
         <label>
-        <strong className='text-xl font-semibold tracking-tighter'>Filter By:</strong>
-        <select onChange={handleFilterChange} value={filterBy}  className="border rounded p-1">
+        <strong className='text-xl font-semibold tracking-tighter text-right mr-2'>Filter By:</strong>
+        <select onChange={handleFilterChange} value={filterBy}  className="border rounded p-1 ml-2">
           <option value="Support">Support</option>
           <option value="Medic">Medic</option>
           <option value="Assault">Assault</option>
@@ -68,7 +71,9 @@ function SortBar({filterBy, sortBy, onChangeSort,onChangeFilter }) {
         </select>
       </label>
     </div>
-      </div>
+  </div>
+</div>
+        
       
     
   );

@@ -9,9 +9,6 @@ function BodyContainer() {
   const [sortedBy, setSortedBy] = useState("Health")
   const [filterBy, setFilteredBy] = useState("Support")
  
-
-  
-   
   // getting the bots from the API using fetch
   useEffect(() => {
       fetch("http://localhost:8001/bots")
@@ -40,15 +37,28 @@ function BodyContainer() {
     ));
   }
 
+  // Deleting bot completely from front end and backend
+  
+  function handleDeleteBot(botToDelete) {
+    fetch(`http://localhost:8001/bots/${botToDelete.id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(() => {
+        setBots((bots) => bots.filter((bot) => bot.id !== botToDelete.id));
+        setMyArmy((myArmy) => myArmy.filter((bot) => bot.id !== botToDelete.id));
+      });
+    }
+
   // sorting
   const sortedBots = (bots) => {
     switch (sortedBy) {
       case 'armor':
         return [...bots].sort((botA, botB) => botA.name.localeCompare(botB.name));
       case 'damage':
-        return [...bots].sort((botA, botB) => botB.damage - botA.damage); // Sort by damage in descending order
+        return [...bots].sort((botA, botB) => botB.damage - botA.damage); // Sorting by damage in descending order
       case 'health':
-        return [...bots].sort((botA, botB) => botB.health - botA.health); // Sort by health in descending order
+        return [...bots].sort((botA, botB) => botB.health - botA.health); // Sorting by health in descending order
       default:
         return bots;
     }
@@ -64,9 +74,9 @@ function BodyContainer() {
 
   return (
     <div>
-      <YourBotArmy bots={myArmy} onRemoveBot={handleRemoveFromArmy}/>
+      <YourBotArmy bots={myArmy} onRemoveBot={handleRemoveFromArmy} onDeleteBot={handleDeleteBot}/>
       <SortBar  sortedBy={sortedBy} filterBy={filterBy} onChangeFilter={setFilteredBy} onChangeSort={setSortedBy}/>
-      <BotCollection bots={botsToBeDiaplayed} onAddBot={handleAddBotToArmy}/>
+      <BotCollection bots={botsToBeDiaplayed} onAddBot={handleAddBotToArmy} myArmy={myArmy}/>
     </div>
   )
 }

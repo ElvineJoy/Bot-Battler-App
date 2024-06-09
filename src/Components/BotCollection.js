@@ -1,15 +1,19 @@
 import React from 'react'
 import Bot from './Bot';
 
-function BotCollection({bots, onAddBot}) {
+function BotCollection({bots, onAddBot, myArmy}) {
    
-    const botsList = bots.map((bot) => (
+    const botsList = bots.map((bot) => {
+      const isInArmy = myArmy.some(myBot => myBot.id === bot.id);   //tests whether any of the bots pass the isInArmy condition so that only those get the x button whilein the army component.
+      return (
         <Bot 
         key = {bot.id}
         bot = {bot}
         onClickBot = {onAddBot}
+        isInArmy={isInArmy}
         />
-    ))
+    );
+  });
 
   return (
     <div className="container mx-auto p-4">
