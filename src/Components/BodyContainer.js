@@ -6,6 +6,9 @@ import BotCollection from './BotCollection';
 function BodyContainer() {
   const [bots, setBots] = useState([]);
   const [myArmy, setMyArmy] = useState([]);
+  const [sortedBy, setSortedBy] = useState("Health")
+  const [filterBy, setFilteredBy] = useState("Support")
+ 
 
   
    
@@ -37,11 +40,33 @@ function BodyContainer() {
     ));
   }
 
+  // sorting
+  const sortedBots = (bots) => {
+    switch (sortedBy) {
+      case 'armor':
+        return [...bots].sort((botA, botB) => botA.name.localeCompare(botB.name));
+      case 'damage':
+        return [...bots].sort((botA, botB) => botB.damage - botA.damage); // Sort by damage in descending order
+      case 'health':
+        return [...bots].sort((botA, botB) => botB.health - botA.health); // Sort by health in descending order
+      default:
+        return bots;
+    }
+  };
+
+// filtering
+  const filteredBots = (bots) => {
+    if (!filterBy) return bots
+    return bots.filter((bot) => bot.bot_class === filterBy);
+  };
+
+  const botsToBeDiaplayed = filteredBots(sortedBots(bots));
+
   return (
     <div>
-         <YourBotArmy bots={myArmy} onRemoveBot={handleRemoveFromArmy}/>
-         <SortBar />
-         <BotCollection bots={bots} onAddBot={handleAddBotToArmy}/>
+      <YourBotArmy bots={myArmy} onRemoveBot={handleRemoveFromArmy}/>
+      <SortBar  sortedBy={sortedBy} filterBy={filterBy} onChangeFilter={setFilteredBy} onChangeSort={setSortedBy}/>
+      <BotCollection bots={botsToBeDiaplayed} onAddBot={handleAddBotToArmy}/>
     </div>
   )
 }
