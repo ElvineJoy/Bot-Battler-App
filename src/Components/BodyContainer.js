@@ -11,7 +11,7 @@ function BodyContainer() {
  
   // getting the bots from the API using fetch
   useEffect(() => {
-      fetch("http://localhost:8001/bots")
+      fetch("https://json-server-n7ef.onrender.com/bots")
       .then(r => r.json())
       .then(bots => {
           setBots(bots)}) 
@@ -40,7 +40,7 @@ function BodyContainer() {
   // Deleting bot completely from front end and backend
   
   function handleDeleteBot(botToDelete) {
-    fetch(`http://localhost:8001/bots/${botToDelete.id}`, {
+    fetch(`https://json-server-n7ef.onrender.com/bots${botToDelete.id}`, {
       method: "DELETE",
     })
       .then((r) => r.json())
